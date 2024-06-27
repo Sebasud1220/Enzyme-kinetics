@@ -4,31 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 from sklearn.metrics import r2_score
 
-# Define Langmuir, Hill, Quadratic Hill, and Michaelis-Menten equations
-def langmuir_equation(x, Bmax, Kd):
-    return (Bmax * np.array(x)) / (Kd + np.array(x))
-
-def hill_equation(x, Bmax, Kd, n):
-    return (Bmax * np.array(x)**n) / (Kd**n + np.array(x)**n)
-
-def quadratic_hill_equation(x, Bmax, Kd, n, c):
-    return (Bmax * (np.array(x)**n + c)) / (Kd**n + np.array(x)**n + c)
-
-def michaelis_menten_equation(x, Vmax, Km):
-    return (Vmax * np.array(x)) / (Km + np.array(x))
-
-# Function to select equation based on user choice
-def select_equation(equation_name):
-    if equation_name == 'Langmuir':
-        return langmuir_equation, ['Bmax', 'Kd']
-    elif equation_name == 'Hill':
-        return hill_equation, ['Bmax', 'Kd', 'n']
-    elif equation_name == 'Quadratic Hill':
-        return quadratic_hill_equation, ['Bmax', 'Kd', 'n', 'c']
-    elif equation_name == 'Michaelis-Menten':
-        return michaelis_menten_equation, ['Vmax', 'Km']
-    else:
-        raise ValueError(f"Equation '{equation_name}' not recognized.")
+# Define your equations and functions here
 
 # Streamlit UI title and instructions
 st.title('Equation Fitting')
@@ -121,5 +97,3 @@ for i, (xdata, ydata, dataset_name) in enumerate(datasets):
 
     except RuntimeError as e:
         st.error(f"{dataset_name} Optimal parameters not found: {e}")
-
-# Display instructions or additional UI elements as needed
